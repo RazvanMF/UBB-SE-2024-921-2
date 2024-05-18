@@ -46,15 +46,16 @@ namespace NamespaceGPT.Api.Controllers
 
         private void ConfigureServices(ServiceCollection services)
         {
-            IConfigurationManager configurationManager = new ConfigurationManager();
+            // register config manager
+            services.AddSingleton<ConfigurationManager>();
 
             // register repositories
-            services.AddSingleton(provider => new UserRepository(configurationManager));
-            services.AddSingleton(provider => new MarketplaceRepository(configurationManager));
-            services.AddSingleton(provider => new ListingRepository(configurationManager));
-            services.AddSingleton(provider => new FavouriteProductRepository(configurationManager));
-            services.AddSingleton(provider => new ReviewRepository(configurationManager));
-            services.AddSingleton(provider => new ProductRepository(configurationManager));
+            services.AddSingleton<UserRepository>();
+            services.AddSingleton<MarketplaceRepository>();
+            services.AddSingleton<ListingRepository>();
+            services.AddSingleton<FavouriteProductRepository>();
+            services.AddSingleton<ReviewRepository>();
+            services.AddSingleton<ProductRepository>();
 
             // register services
             services.AddSingleton<UserService>();
