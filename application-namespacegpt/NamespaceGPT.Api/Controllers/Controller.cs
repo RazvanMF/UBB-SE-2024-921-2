@@ -56,8 +56,8 @@ namespace NamespaceGPT.Api.Controllers
             services.AddScoped<IMarketplaceRepository, MarketplaceRepository>();
             services.AddScoped<IListingRepository, ListingRepository>();
             services.AddScoped<IFavouriteProductRepository, FavouriteProductRepository>();
-            services.AddScoped<ReviewRepository>();
-            services.AddScoped<ProductRepository>();
+            services.AddScoped<IReviewRepository, ReviewRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
 
             // register services
             services.AddScoped<IUserService, UserService>();
