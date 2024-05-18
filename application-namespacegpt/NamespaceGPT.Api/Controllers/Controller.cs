@@ -1,30 +1,79 @@
-﻿using NamespaceGPT.Business.Services;
+﻿using Microsoft.Extensions.DependencyInjection;
+using NamespaceGPT.Business.Services;
+using NamespaceGPT.Business.Services.Interfaces;
 using NamespaceGPT.Common.ConfigurationManager;
 using NamespaceGPT.Data.Repositories;
+using NamespaceGPT.Data.Repositories.Interfaces;
 
 namespace NamespaceGPT.Api.Controllers
 {
     public class Controller
     {
-        public UserController UserController { get; }
-        public MarketplaceController MarketplaceController { get; }
-        public ListingController ListingController { get; }
-        public FavouriteProductController FavouriteProductController { get; }
-        public ReviewController ReviewController { get; }
-        public ProductController ProductController { get; }
+        private ServiceProvider serviceProvider;
+
+        // Refactored to use ServiceProvider to avoid rewriting code everywhere else
+        public UserController UserController
+        {
+            get { return serviceProvider.GetService<UserController>() !; }
+        }
+        public MarketplaceController MarketplaceController
+        {
+            get { return serviceProvider.GetService<MarketplaceController>() !; }
+        }
+        public ListingController ListingController
+        {
+            get { return serviceProvider.GetService<ListingController>() !; }
+        }
+        public FavouriteProductController FavouriteProductController
+        {
+            get { return serviceProvider.GetService<FavouriteProductController>() !; }
+        }
+        public ReviewController ReviewController
+        {
+            get { return serviceProvider.GetService<ReviewController>() !; }
+        }
+        public ProductController ProductController
+        {
+            get { return serviceProvider.GetService<ProductController>() !; }
+        }
 
         private static readonly Controller Instance = new ();
 
         private Controller()
         {
-            IConfigurationManager configurationManager = new ConfigurationManager();
+            ServiceCollection services = new ServiceCollection();
+            ConfigureServices(services);
+            serviceProvider = services.BuildServiceProvider();
+        }
 
-            UserController = new UserController(new UserService(new UserRepository(configurationManager)));
-            MarketplaceController = new MarketplaceController(new MarketplaceService(new MarketplaceRepository(configurationManager)));
-            ListingController = new ListingController(new ListingService(new ListingRepository(configurationManager)));
-            FavouriteProductController = new FavouriteProductController(new FavouriteProductService(new FavouriteProductRepository(configurationManager)));
-            ReviewController = new ReviewController(new ReviewService(new ReviewRepository(configurationManager)));
-            ProductController = new ProductController(new ProductService(new ProductRepository(configurationManager)));
+        private void ConfigureServices(ServiceCollection services)
+        {
+            // register config manager
+            services.AddScoped<IConfigurationManager, ConfigurationManager>();
+
+            // register repositories
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IMarketplaceRepository, MarketplaceRepository>();
+            services.AddScoped<IListingRepository, ListingRepository>();
+            services.AddScoped<IFavouriteProductRepository, FavouriteProductRepository>();
+            services.AddScoped<IReviewRepository, ReviewRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+
+            // register services
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IMarketplaceService, MarketplaceService>();
+            services.AddScoped<IListingService, ListingService>();
+            services.AddScoped<IFavouriteProductService, FavouriteProductService>();
+            services.AddScoped<IReviewService, ReviewService>();
+            services.AddScoped<IProductService, ProductService>();
+
+            // register controllers
+            services.AddScoped<UserController, UserController>();
+            services.AddScoped<MarketplaceController, MarketplaceController>();
+            services.AddScoped<ListingController, ListingController>();
+            services.AddScoped<FavouriteProductController, FavouriteProductController>();
+            services.AddScoped<ReviewController, ReviewController>();
+            services.AddScoped<ProductController, ProductController>();
         }
 
         public static Controller GetInstance()
