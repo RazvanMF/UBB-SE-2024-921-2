@@ -8,7 +8,6 @@
         public string Description { get; set; } = string.Empty;
         public string Brand { get; set; } = string.Empty;
         public string ImageURL { get; set; } = string.Empty;
-        public string AttributesAsString { get; set; } = string.Empty;
         public IDictionary<string, string> Attributes { get; set; } = new Dictionary<string, string>();
     }
 }

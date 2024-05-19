@@ -21,22 +21,23 @@ namespace NamespaceGPT.Business.Services
         {
             try
             {
-                ProductToPostable productToPostable = new ProductToPostable { Id = product.Id, Attributes = product.AttributesAsString, Brand = product.Brand, Category = product.Category, Description = product.Description, ImageURL = product.ImageURL, Name = product.Name };
+                string attributesAsString = ProductRepository.ConvertAttributesFromDictToString(product.Attributes);
+                ProductToPostable productToPostable = new ProductToPostable { Id = product.Id, Attributes = attributesAsString, Brand = product.Brand, Category = product.Category, Description = product.Description, ImageURL = product.ImageURL, Name = product.Name };
                 HttpClient client = new HttpClient();
                 StringContent content = new StringContent(JsonConvert.SerializeObject(productToPostable), Encoding.UTF8, "application/json");
 
                 HttpResponseMessage response = Task.Run(() => client.PostAsync("https://localhost:7040/api/products", content)).GetAwaiter().GetResult();
                 response.EnsureSuccessStatusCode();  // error-prone
                 string responseBody = Task.Run(() => response.Content.ReadAsStringAsync()).GetAwaiter().GetResult();
-                responseBody = responseBody.Replace("attributes", "attributesAsString");
-                Product? result = JsonConvert.DeserializeObject<Product>(responseBody);
+                ProductToPostable? result = JsonConvert.DeserializeObject<ProductToPostable>(responseBody);
                 if (result == null)
                 {
                     throw new Exception("???");
                 }
-                result.Attributes = ProductRepository.ConvertAttributesFromStringToDict(result.AttributesAsString);
 
-                return result.Id;
+                Product returned = new Product { Id = result.Id, Brand = result.Brand, Category = result.Category, Description = result.Description, Name = result.Name, ImageURL = result.ImageURL, Attributes = ProductRepository.ConvertAttributesFromStringToDict(result.Attributes) };
+
+                return returned.Id;
             }
             catch
             {
@@ -71,15 +72,16 @@ namespace NamespaceGPT.Business.Services
                 HttpResponseMessage response = Task.Run(() => client.GetAsync("https://localhost:7040/api/products")).GetAwaiter().GetResult();
                 response.EnsureSuccessStatusCode();  // error-prone
                 string responseBody = Task.Run(() => response.Content.ReadAsStringAsync()).GetAwaiter().GetResult();
-                responseBody = responseBody.Replace("attributes", "attributesAsString");
-                List<Product>? result = JsonConvert.DeserializeObject<List<Product>>(responseBody);
+                List<ProductToPostable>? result = JsonConvert.DeserializeObject<List<ProductToPostable>>(responseBody);
                 if (result == null)
                 {
                     throw new Exception("???");
                 }
-                result.ForEach(element => element.Attributes = ProductRepository.ConvertAttributesFromStringToDict(element.AttributesAsString));
 
-                return result;
+                List<Product> returned = new List<Product>();
+                result.ForEach(element => returned.Add(new Product { Id = element.Id, Brand = element.Brand, Category = element.Category, Description = element.Description, Name = element.Name, ImageURL = element.ImageURL, Attributes = ProductRepository.ConvertAttributesFromStringToDict(element.Attributes) }));
+
+                return returned;
             }
             catch
             {
@@ -97,14 +99,13 @@ namespace NamespaceGPT.Business.Services
                 HttpResponseMessage response = Task.Run(() => client.GetAsync("https://localhost:7040/api/products/" + id)).GetAwaiter().GetResult();
                 response.EnsureSuccessStatusCode();  // error-prone
                 string responseBody = Task.Run(() => response.Content.ReadAsStringAsync()).GetAwaiter().GetResult();
-                responseBody = responseBody.Replace("attributes", "attributesAsString");
-                Product? result = JsonConvert.DeserializeObject<Product>(responseBody);
+                ProductToPostable? result = JsonConvert.DeserializeObject<ProductToPostable>(responseBody);
                 if (result == null)
                 {
                     throw new Exception("???");
                 }
-                result.Attributes = ProductRepository.ConvertAttributesFromStringToDict(result.AttributesAsString);
-                return result;
+                Product returned = new Product { Id = result.Id, Brand = result.Brand, Category = result.Category, Description = result.Description, Name = result.Name, ImageURL = result.ImageURL, Attributes = ProductRepository.ConvertAttributesFromStringToDict(result.Attributes) };
+                return returned;
             }
             catch
             {
@@ -118,7 +119,8 @@ namespace NamespaceGPT.Business.Services
         {
             try
             {
-                ProductToPostable productToPostable = new ProductToPostable { Id = product.Id, Attributes = product.AttributesAsString, Brand = product.Brand, Category = product.Category, Description = product.Description, ImageURL = product.ImageURL, Name = product.Name };
+                string attributesAsString = ProductRepository.ConvertAttributesFromDictToString(product.Attributes);
+                ProductToPostable productToPostable = new ProductToPostable { Id = product.Id, Attributes = attributesAsString, Brand = product.Brand, Category = product.Category, Description = product.Description, ImageURL = product.ImageURL, Name = product.Name };
                 HttpClient client = new HttpClient();
                 StringContent content = new StringContent(JsonConvert.SerializeObject(productToPostable), Encoding.UTF8, "application/json");
 
