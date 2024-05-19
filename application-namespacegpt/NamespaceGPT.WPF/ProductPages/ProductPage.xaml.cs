@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using NamespaceGPT.Api.Controllers;
 using NamespaceGPT.Data.Models;
 
@@ -28,6 +30,13 @@ namespace NamespaceGPT.WPF.ProductPages
 
             InitializeComponent();
             InitializeProductDetails();
+
+            var bitmapImage = new BitmapImage();
+            bitmapImage.BeginInit();
+            bitmapImage.UriSource = new Uri(productController.GetProduct(productId).ImageURL);
+            bitmapImage.EndInit();
+
+            this.ProductImage.Source = bitmapImage;
         }
 
         private void InitializeProductDetails()

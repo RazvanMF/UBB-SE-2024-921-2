@@ -21,7 +21,6 @@ namespace NamespaceGPT.Business.Services
             {
                 HttpClient client = new HttpClient();
                 StringContent content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
-                content.GetType();
 
                 HttpResponseMessage response = Task.Run(() => client.PostAsync("https://localhost:7040/api/users", content)).GetAwaiter().GetResult();
                 response.EnsureSuccessStatusCode();  // error-prone

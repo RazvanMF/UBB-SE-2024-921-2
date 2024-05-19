@@ -1,6 +1,12 @@
-﻿namespace NamespaceGPT.Data.Models
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace NamespaceGPT.Data.Models
 {
-    public class Product
+    public class ProductToPostable
     {
         public int Id { get; set; } = 0;
         public string Name { get; set; } = string.Empty;
@@ -8,7 +14,6 @@
         public string Description { get; set; } = string.Empty;
         public string Brand { get; set; } = string.Empty;
         public string ImageURL { get; set; } = string.Empty;
-        public string AttributesAsString { get; set; } = string.Empty;
-        public IDictionary<string, string> Attributes { get; set; } = new Dictionary<string, string>();
+        public string Attributes { get; set; } = string.Empty;
     }
 }
