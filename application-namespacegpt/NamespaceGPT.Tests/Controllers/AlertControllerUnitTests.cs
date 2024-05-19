@@ -159,7 +159,7 @@ namespace NamespaceGPT.UnitTesting.Controllers
         {
             try
             {
-                alertController.GetAlert(42);
+                alertController.GetAlert(42, null);
                 Debug.Assert(false);
             }
             catch

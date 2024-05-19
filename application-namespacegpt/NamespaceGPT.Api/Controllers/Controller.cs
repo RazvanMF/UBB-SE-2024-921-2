@@ -36,6 +36,10 @@ namespace NamespaceGPT.Api.Controllers
         {
             get { return serviceProvider.GetService<ProductController>() !; }
         }
+        public AlertController AlertController
+        {
+            get { return serviceProvider.GetService<AlertController>()!; }
+        }
 
         private static readonly Controller Instance = new ();
 
@@ -58,6 +62,7 @@ namespace NamespaceGPT.Api.Controllers
             services.AddScoped<IFavouriteProductRepository, FavouriteProductRepository>();
             services.AddScoped<IReviewRepository, ReviewRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IAlertRepository, AlertRepository>();
 
             // register services
             services.AddScoped<IUserService, UserService>();
@@ -66,6 +71,7 @@ namespace NamespaceGPT.Api.Controllers
             services.AddScoped<IFavouriteProductService, FavouriteProductService>();
             services.AddScoped<IReviewService, ReviewService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IAlertService, AlertService>();
 
             // register controllers
             services.AddScoped<UserController, UserController>();
@@ -74,6 +80,7 @@ namespace NamespaceGPT.Api.Controllers
             services.AddScoped<FavouriteProductController, FavouriteProductController>();
             services.AddScoped<ReviewController, ReviewController>();
             services.AddScoped<ProductController, ProductController>();
+            services.AddScoped<AlertController, AlertController>();
         }
 
         public static Controller GetInstance()

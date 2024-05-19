@@ -22,7 +22,7 @@ namespace NamespaceGPT.Api.Controllers
             return alertService.DeleteAlert(id, alert);
         }
 
-        public IAlert? GetAlert(int alertId) => alertService.GetAlert(alertId);
+        public IAlert? GetAlert(int alertId, IAlert alert) => alertService.GetAlert(alertId, alert);
 
         public IEnumerable<IAlert> GetAllAlerts()
         {
