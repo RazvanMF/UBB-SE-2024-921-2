@@ -30,13 +30,6 @@ namespace NamespaceGPT.WPF.ProductPages
 
             InitializeComponent();
             InitializeProductDetails();
-
-            var bitmapImage = new BitmapImage();
-            bitmapImage.BeginInit();
-            bitmapImage.UriSource = new Uri(productController.GetProduct(productId).ImageURL);
-            bitmapImage.EndInit();
-
-            this.ProductImage.Source = bitmapImage;
         }
 
         private void InitializeProductDetails()
