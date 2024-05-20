@@ -13,7 +13,7 @@ namespace NamespaceGPT.Business.Services.Interfaces
         bool DeleteAlert(int id, IAlert alert);
         bool UpdateAlert(int id, IAlert alert);
         IEnumerable<IAlert> GetAllAlerts();
-        IAlert? GetAlert(int alertId);
+        IAlert? GetAlert(int alertId, IAlert alert);
         IEnumerable<IAlert> GetAllUserAlerts(int userId);
         IEnumerable<IAlert> GetAllProductAlerts(int productId);
     }

@@ -23,6 +23,7 @@ namespace NamespaceGPT.WPF.ProductPages
             reviewController = Controller.GetInstance().ReviewController;
             userController = Controller.GetInstance().UserController;
 
+            // reviewController.AddReview(new Review { ProductId = 1, UserId = 1, Rating = 3, Title = "Sanity checked", Description = "sword is nice, but i hate SE" });
             InitializeReviewsList();
             InitializeComponent();
 
