@@ -23,7 +23,7 @@ namespace NamespaceGPT.UnitTesting.Controllers
             // Initialize the actual ListingService and ListingController
             IConfigurationManager configurationManager = new ConfigurationManager();
             IListingRepository listingRepository = new ListingRepository(configurationManager);
-            listingService = new ListingService(listingRepository);
+            listingService = new ListingService();
             listingController = new ListingController(listingService);
         }
 

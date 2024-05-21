@@ -1,5 +1,7 @@
 ﻿using NamespaceGPT.Data.DTOs;
 using NamespaceGPT.Data.Models;
+using NamespaceGPT_ASP.NET_Repository.DTOs.SpartacusDTO;
+using NamespaceGPT_ASP.NET_Repository.Models.SpartacusModels;
 
 namespace NamespaceGPT_ASP.NET_Repository.Utils
 {
@@ -17,5 +19,69 @@ namespace NamespaceGPT_ASP.NET_Repository.Utils
         public static Listing Converter_DTOToListing(ListingDTO listingDTO) => new Listing { Id = listingDTO.Id, MarketplaceId = listingDTO.Id, Price = listingDTO.Price, ProductId = listingDTO.ProductId };
         public static FavouriteProduct Converter_DTOToFavouriteProduct(FavouriteProductDTO favouriteProductDTO) => new FavouriteProduct { Id = favouriteProductDTO.Id, UserId = favouriteProductDTO.UserId, ProductId = favouriteProductDTO.ProductId };
         public static Marketplace Converter_DTOToMarketplace(MarketplaceDTO marketplaceDTO) => new Marketplace { Id = marketplaceDTO.Id, Country = marketplaceDTO.Country, MarketplaceName = marketplaceDTO.MarketplaceName, WebsiteURL = marketplaceDTO.WebsiteURL };
+        public static FAQ Converter_DTOToFAQ(FAQDTO faqDTO) => new FAQ
+        {
+            Id = faqDTO.Id,
+            Question = faqDTO.Question,
+            Answer = faqDTO.Answer,
+            BusinessId = faqDTO.BusinessId
+        };
+        public static SpartacusReview Converter_DTOToSpartacusReview(SpartacusReviewDTO spartacusReviewDTO) => new SpartacusReview
+        {
+            Id = spartacusReviewDTO.Id,
+            UserName = spartacusReviewDTO.UserName,
+            Rating = spartacusReviewDTO.Rating,
+            Comment = spartacusReviewDTO.Comment,
+            Title = spartacusReviewDTO.Title,
+            ImagePath = spartacusReviewDTO.ImagePath,
+            DateOfCreation = spartacusReviewDTO.DateOfCreation,
+            AdminCommentId = spartacusReviewDTO.AdminCommentId,
+            BusinessId = spartacusReviewDTO.BusinessId
+        };
+        public static Post Converter_DTOToPost(PostDTO postDTO) => new Post
+        {
+            Id = postDTO.Id,
+            NumberOfLikes = postDTO.NumberOfLikes,
+            CreationDate = postDTO.CreationDate,
+            ImagePath = postDTO.ImagePath,
+            Caption = postDTO.Caption,
+            BusinessId = postDTO.BusinessId
+        };
+        public static Business Converter_DTOToBusiness(BussinessDTO businessDTO) => new Business
+        {
+            Id = businessDTO.Id,
+            Name = businessDTO.Name,
+            Description = businessDTO.Description,
+            Category = businessDTO.Category,
+            LogoFileName = businessDTO.LogoFileName,
+            Logo = businessDTO.Logo,
+            BannerShort = businessDTO.BannerShort,
+            Banner = businessDTO.Banner,
+            PhoneNumber = businessDTO.PhoneNumber,
+            Email = businessDTO.Email,
+            Website = businessDTO.Website,
+            Address = businessDTO.Address,
+            CreatedAt = businessDTO.CreatedAt
+        };
+        public static Account Converter_DTOToAccount(AccountDTO accountDTO) => new Account
+        {
+            Id = accountDTO.Id,
+            Username = accountDTO.Username,
+            Password = accountDTO.Password,
+            Firstname = accountDTO.Firstname,
+            Lastname = accountDTO.Lastname,
+            Email = accountDTO.Email,
+            Birthday = accountDTO.Birthday,
+            Gender = accountDTO.Gender
+        };
+        public static Comment Converter_DTOToComment(CommentDTO commentDTO) => new Comment
+        {
+            Id = commentDTO.Id,
+            Username = commentDTO.Username,
+            Content = commentDTO.Content,
+            DateOfCreation = commentDTO.DateOfCreation,
+            DateOfUpdate = commentDTO.DateOfUpdate,
+            PostId = commentDTO.PostId
+        };
     }
 }

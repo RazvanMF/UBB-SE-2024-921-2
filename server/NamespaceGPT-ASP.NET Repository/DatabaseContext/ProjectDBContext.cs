@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NamespaceGPT.Data.Models;
+using NamespaceGPT_ASP.NET_Repository.Models.SpartacusModels;
 
 namespace NamespaceGPT_ASP.NET_Repository.DatabaseContext
 {
@@ -9,6 +10,7 @@ namespace NamespaceGPT_ASP.NET_Repository.DatabaseContext
         {
         }
 
+        // CELEBRATION OF CAPITALISM
         public DbSet<User> AppUser { get; set; } = null!;
         public DbSet<AdRecommendation> AdRecommendation { get; set; } = null!;
         public DbSet<BackInStockAlert> BackInStockAlerts { get; set; } = null!;
@@ -21,5 +23,13 @@ namespace NamespaceGPT_ASP.NET_Repository.DatabaseContext
         public DbSet<Review> Review { get; set; } = null!;
         public DbSet<UserActivity> UserActivity { get; set; } = null!;
         public DbSet<Sale> Sale { get; set; } = default!;
+
+        // SPARTACUS
+        public DbSet<Account> Account { get; set; } = null!;
+        public DbSet<Business> Business { get; set; } = null!;
+        public DbSet<Comment> Comment { get; set; } = null!;
+        public DbSet<FAQ> FAQ { get; set; } = default!;
+        public DbSet<Post> Post { get; set; } = null!;
+        public DbSet<SpartacusReview> SpartacusReview { get; set; } = null!;
     }
 }

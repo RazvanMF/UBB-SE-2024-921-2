@@ -1,5 +1,7 @@
-﻿using NamespaceGPT.Business.Services.Interfaces;
+﻿using System.Text;
+using NamespaceGPT.Business.Services.Interfaces;
 using NamespaceGPT.Data.Models;
+using Newtonsoft.Json;
 
 namespace NamespaceGPT.Business.Services
 {
@@ -53,7 +55,7 @@ namespace NamespaceGPT.Business.Services
                 return false;
             }
 
-            //return reviewRepository.DeleteReview(id);
+            // return reviewRepository.DeleteReview(id);
         }
 
         public IEnumerable<Review> GetAllReviews()
@@ -76,7 +78,7 @@ namespace NamespaceGPT.Business.Services
                 return null;
             }
 
-            //return reviewRepository.GetAllReviews();
+            // return reviewRepository.GetAllReviews();
         }
 
         public Review? GetReview(int id)
@@ -98,7 +100,7 @@ namespace NamespaceGPT.Business.Services
             {
                 return null;
             }
-            //return reviewRepository.GetReview(id);
+            // return reviewRepository.GetReview(id);
         }
 
         public IEnumerable<Review> GetReviewsForProduct(int productId)
@@ -122,7 +124,7 @@ namespace NamespaceGPT.Business.Services
                 return null;
             }
 
-            //return reviewRepository.GetReviewsForProduct(productId);
+            // return reviewRepository.GetReviewsForProduct(productId);
         }
 
         public IEnumerable<Review> GetReviewsFromUser(int userId)
@@ -146,7 +148,7 @@ namespace NamespaceGPT.Business.Services
                 return null;
             }
 
-            //return reviewRepository.GetReviewsFromUser(userId);
+            // return reviewRepository.GetReviewsFromUser(userId);
         }
 
         public bool UpdateReview(int id, Review review)
@@ -165,7 +167,7 @@ namespace NamespaceGPT.Business.Services
                 return false;
             }
 
-            //return reviewRepository.UpdateReview(id, review);
+            // return reviewRepository.UpdateReview(id, review);
         }
     }
 }
