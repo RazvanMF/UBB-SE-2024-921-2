@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NamespaceGPT.Data.Models;
 using NamespaceGPT.Data.DTOs;
+using NamespaceGPT_ASP.NET_Repository.DTOs.SpartacusDTO;
 using NamespaceGPT_ASP.NET_Repository.DatabaseContext;
 using NamespaceGPT_ASP.NET_Repository.Utils;
 
