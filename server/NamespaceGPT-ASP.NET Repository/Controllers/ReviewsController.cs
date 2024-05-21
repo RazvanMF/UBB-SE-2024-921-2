@@ -14,11 +14,11 @@ namespace NamespaceGPT_ASP.NET_Repository.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ReviewController : ControllerBase
+    public class ReviewsController : ControllerBase
     {
         private readonly ProjectDBContext context;
 
-        public ReviewController(ProjectDBContext context)
+        public ReviewsController(ProjectDBContext context)
         {
             this.context = context;
         }

@@ -1,6 +1,6 @@
 ﻿namespace NamespaceGPT_ASP.NET_Repository.DTOs.SpartacusDTO
 {
-    public class ReviewDTO
+    public class SpartacusReviewDTO
     {
         public int Id { get; set; }
         public string UserName { get; set; }
