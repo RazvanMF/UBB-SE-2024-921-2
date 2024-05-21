@@ -83,8 +83,5 @@ namespace NamespaceGPT_ASP.NET_Repository.Utils
             ImagePath = post.ImagePath,
             Caption = post.Caption
         };
-
-
     }
 }
-

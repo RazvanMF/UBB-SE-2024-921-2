@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NamespaceGPT_ASP.NET_Repository.DatabaseContext;
 
@@ -11,9 +12,11 @@ using NamespaceGPT_ASP.NET_Repository.DatabaseContext;
 namespace NamespaceGPT_ASP.NET_Repository.Migrations
 {
     [DbContext(typeof(ProjectDBContext))]
-    partial class ProjectDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240521194252_AddSpartacusDbSets")]
+    partial class AddSpartacusDbSets
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
