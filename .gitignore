@@ -396,3 +396,5 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+server/NamespaceGPT-ASP.NET Repository/appsettings.json
+server/NamespaceGPT-ASP.NET Repository/appsettings.json
