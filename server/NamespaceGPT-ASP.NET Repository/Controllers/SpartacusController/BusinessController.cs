@@ -28,21 +28,21 @@ namespace NamespaceGPT_ASP.NET_Repository.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BussinessDTO>>> GetBusiness()
         {
-            return await context.BussinessDTO.ToListAsync();
+            return await context.Business.Select(element => BaseToDTOConverters.Converter_BusinessToDTO(element)).ToListAsync();
         }
 
         // GET: api/Businesses/5
         [HttpGet("{id}")]
         public async Task<ActionResult<BussinessDTO>> GetBusiness(int id)
         {
-            var business = await context.BussinessDTO.FindAsync(id);
+            var business = await context.Business.FindAsync(id);
 
             if (business == null)
             {
                 return NotFound();
             }
 
-            return business;
+            return BaseToDTOConverters.Converter_BusinessToDTO(business);
         }
 
         // PUT: api/Businesses/5
@@ -79,7 +79,7 @@ namespace NamespaceGPT_ASP.NET_Repository.Controllers
         [HttpPost]
         public async Task<ActionResult<BussinessDTO>> PostBusiness(BussinessDTO business)
         {
-            context.BussinessDTO.Add(business);
+            context.Business.Add(DTOToBaseConverters.Converter_DTOToBusiness(business));
             await context.SaveChangesAsync();
 
             return CreatedAtAction("GetBusiness", new { id = business.Id }, business);
@@ -89,13 +89,13 @@ namespace NamespaceGPT_ASP.NET_Repository.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBusiness(int id)
         {
-            var business = await context.BussinessDTO.FindAsync(id);
+            var business = await context.Business.FindAsync(id);
             if (business == null)
             {
                 return NotFound();
             }
 
-            context.BussinessDTO.Remove(business);
+            context.Business.Remove(business);
             await context.SaveChangesAsync();
 
             return NoContent();
@@ -103,7 +103,7 @@ namespace NamespaceGPT_ASP.NET_Repository.Controllers
 
         private bool BusinessExists(int id)
         {
-            return context.BussinessDTO.Any(e => e.Id == id);
+            return context.Business.Any(e => e.Id == id);
         }
     }
 }

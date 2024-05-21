@@ -28,7 +28,7 @@ namespace NamespaceGPT_ASP.NET_Repository.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CommentDTO>>> GetComment()
         {
-            return await context.Comment.ToListAsync();
+            return await context.Comment.Select(element => BaseToDTOConverters.Converter_CommentToDTO(element)).ToListAsync();
         }
 
         // GET: api/Comments/5
@@ -42,7 +42,7 @@ namespace NamespaceGPT_ASP.NET_Repository.Controllers
                 return NotFound();
             }
 
-            return comment;
+            return BaseToDTOConverters.Converter_CommentToDTO(comment);
         }
 
         // PUT: api/Comments/5
@@ -79,7 +79,7 @@ namespace NamespaceGPT_ASP.NET_Repository.Controllers
         [HttpPost]
         public async Task<ActionResult<CommentDTO>> PostComment(CommentDTO comment)
         {
-            context.Comment.Add(comment);
+            context.Comment.Add(DTOToBaseConverters.Converter_DTOToComment(comment));
             await context.SaveChangesAsync();
 
             return CreatedAtAction("GetComment", new { id = comment.Id }, comment);

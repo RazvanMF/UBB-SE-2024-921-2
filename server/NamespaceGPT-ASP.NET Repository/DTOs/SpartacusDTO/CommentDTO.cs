@@ -30,5 +30,6 @@
             get;
             set;
         }
+        public int PostId { get; set; }
     }
 }

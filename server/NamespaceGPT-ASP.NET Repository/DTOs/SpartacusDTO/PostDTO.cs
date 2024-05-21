@@ -7,5 +7,6 @@
         public DateTime CreationDate { get; set; }
         public string ImagePath { get; set; }
         public string Caption { get; set; }
+        public int BusinessId { get; set; }
     }
 }

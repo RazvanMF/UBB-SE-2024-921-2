@@ -11,6 +11,7 @@ using NamespaceGPT_ASP.NET_Repository.DatabaseContext;
 using NamespaceGPT_ASP.NET_Repository.Utils;
 using Microsoft.Extensions.Hosting;
 using NamespaceGPT_ASP.NET_Repository.DTOs.SpartacusDTO;
+using NamespaceGPT_ASP.NET_Repository.Models.SpartacusModels;
 
 namespace NamespaceGPT_ASP.NET_Repository.Controllers
 {

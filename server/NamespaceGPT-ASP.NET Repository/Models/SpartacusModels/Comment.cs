@@ -23,5 +23,9 @@ namespace NamespaceGPT.Data.Models
 
         [Required]
         public DateTime DateOfUpdate { get; set; } = DateTime.Now;
+
+        [ForeignKey("Post")]
+        [Required]
+        public int PostId { get; set; }
     }
 }

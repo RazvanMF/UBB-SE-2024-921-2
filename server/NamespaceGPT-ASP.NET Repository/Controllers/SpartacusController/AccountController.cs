@@ -28,21 +28,21 @@ namespace NamespaceGPT_ASP.NET_Repository.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AccountDTO>>> GetAccount()
         {
-            return await context.AccountDTO.ToListAsync();
+            return await context.Account.Select(element => BaseToDTOConverters.Converter_AccountToDTO(element)).ToListAsync();
         }
 
         // GET: api/Accounts/5
         [HttpGet("{username}")]
         public async Task<ActionResult<AccountDTO>> GetAccount(string username)
         {
-            var account = await context.AccountDTO.FindAsync(username);
+            var account = await context.Account.FindAsync(username);
 
             if (account == null)
             {
                 return NotFound();
             }
 
-            return account;
+            return BaseToDTOConverters.Converter_AccountToDTO(account);
         }
 
         // PUT: api/Accounts/5
@@ -79,7 +79,7 @@ namespace NamespaceGPT_ASP.NET_Repository.Controllers
         [HttpPost]
         public async Task<ActionResult<AccountDTO>> PostAccount(AccountDTO account)
         {
-            context.AccountDTO.Add(account);
+            context.Account.Add(DTOToBaseConverters.Converter_DTOToAccount(account));
             await context.SaveChangesAsync();
 
             return CreatedAtAction("GetAccount", new { username = account.Username }, account);
@@ -89,13 +89,13 @@ namespace NamespaceGPT_ASP.NET_Repository.Controllers
         [HttpDelete("{username}")]
         public async Task<IActionResult> DeleteAccount(string username)
         {
-            var account = await context.AccountDTO.FindAsync(username);
+            var account = await context.Account.FindAsync(username);
             if (account == null)
             {
                 return NotFound();
             }
 
-            context.AccountDTO.Remove(account);
+            context.Account.Remove(account);
             await context.SaveChangesAsync();
 
             return NoContent();
@@ -103,7 +103,7 @@ namespace NamespaceGPT_ASP.NET_Repository.Controllers
 
         private bool AccountExists(string username)
         {
-            return context.AccountDTO.Any(e => e.Username == username);
+            return context.Account.Any(e => e.Username == username);
         }
     }
 }

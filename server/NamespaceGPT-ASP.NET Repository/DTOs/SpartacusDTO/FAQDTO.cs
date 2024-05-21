@@ -19,5 +19,6 @@
             get;
             set;
         }
+        public int BusinessId { get; set; }
     }
 }

@@ -10,5 +10,6 @@
         public string ImagePath { get; set; }
         public DateTime DateOfCreation { get; set; }
         public int AdminCommentId { get; set; }
+        public int BusinessId { get; set; }
     }
 }

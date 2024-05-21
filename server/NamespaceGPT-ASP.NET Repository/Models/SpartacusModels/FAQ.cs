@@ -17,5 +17,9 @@ namespace NamespaceGPT.Data.Models
         [Required]
         [MaxLength(1024)]
         public string Answer { get; set; }
+
+        [ForeignKey("Business")]
+        [Required]
+        public int BusinessId { get; set; }
     }
 }

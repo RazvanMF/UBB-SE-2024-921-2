@@ -25,8 +25,10 @@ namespace NamespaceGPT_ASP.NET_Repository.Models.SpartacusModels
         [MaxLength(512)]
         public string Caption { get; set; }
 
-        [ForeignKey("Comment")]
+        [ForeignKey("Business")]
         [Required]
+        public int BusinessId { get; set; }
+
         public List<int> CommentIds { get; set; } = new List<int>();
     }
 }

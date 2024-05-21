@@ -31,6 +31,10 @@ namespace NamespaceGPT.Data.Models
         [Required]
         public DateTime DateOfCreation { get; set; } = DateTime.Now;
 
+        [ForeignKey("Business")]
+        [Required]
+        public int BusinessId { get; set; }
+
         [ForeignKey("AdminComment")]
         [Required]
         public int AdminCommentId { get; set; }

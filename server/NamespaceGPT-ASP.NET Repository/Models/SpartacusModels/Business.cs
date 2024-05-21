@@ -53,19 +53,12 @@ namespace NamespaceGPT.Data.Models
         [Required]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-        [Required]
         public List<string> ManagerUsernames { get; set; } = new List<string>();
 
-        [ForeignKey("Post")]
-        [Required]
         public List<int> PostIds { get; set; } = new List<int>();
 
-        [ForeignKey("SpartacusReview")]
-        [Required]
         public List<int> ReviewIds { get; set; } = new List<int>();
 
-        [ForeignKey("Faq")]
-        [Required]
         public List<int> FaqIds { get; set; } = new List<int>();
     }
 }
