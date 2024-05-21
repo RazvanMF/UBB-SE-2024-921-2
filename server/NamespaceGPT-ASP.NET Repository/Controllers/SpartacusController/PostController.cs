@@ -9,53 +9,56 @@ using NamespaceGPT.Data.Models;
 using NamespaceGPT.Data.DTOs;
 using NamespaceGPT_ASP.NET_Repository.DatabaseContext;
 using NamespaceGPT_ASP.NET_Repository.Utils;
+using Microsoft.Extensions.Hosting;
+using NamespaceGPT_ASP.NET_Repository.DTOs.SpartacusDTO;
 
 namespace NamespaceGPT_ASP.NET_Repository.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ReviewController : ControllerBase
+    public class PostsController : ControllerBase
     {
         private readonly ProjectDBContext context;
 
-        public ReviewController(ProjectDBContext context)
+        public PostsController(ProjectDBContext context)
         {
             this.context = context;
         }
 
-        // GET: api/Reviews
+        // GET: api/Posts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ReviewDTO>>> GetReview()
+        public async Task<ActionResult<IEnumerable<PostDTO>>> GetPosts()
         {
-            return await context.Review.Select(element => BaseToDTOConverters.Converter_ReviewToDTO(element)).ToListAsync();
+            return await context.Post.Select(element => BaseToDTOConverters.Converter_PostToDTO(element)).ToListAsync();
         }
 
-        // GET: api/Reviews/5
+        // GET: api/Posts/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ReviewDTO>> GetReview(int id)
+        public async Task<ActionResult<PostDTO>> GetPost(int id)
         {
-            var review = await context.Review.FindAsync(id);
+            var post = await context.Post.FindAsync(id);
 
-            if (review == null)
+            if (post == null)
             {
                 return NotFound();
             }
 
-            return BaseToDTOConverters.Converter_ReviewToDTO(review);
+            return BaseToDTOConverters.Converter_PostToDTO(post);
         }
 
-        // PUT: api/Reviews/5
+        // PUT: api/Posts/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutReview(int id, ReviewDTO reviewDTO)
+        public async Task<IActionResult> PutPost(int id, PostDTO postDTO)
         {
-            if (id != reviewDTO.Id)
+            if (id != postDTO.Id)
             {
                 return BadRequest();
             }
 
-            var reviewRef = DTOToBaseConverters.Converter_DTOToReview(reviewDTO);
-            context.Entry(reviewRef).State = EntityState.Modified;
+            var postRef = DTOToBaseConverters.Converter_DTOToPost(postDTO);
+
+            context.Entry(postRef).State = EntityState.Modified;
 
             try
             {
@@ -63,7 +66,7 @@ namespace NamespaceGPT_ASP.NET_Repository.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ReviewExists(id))
+                if (!PostExists(id))
                 {
                     return NotFound();
                 }
@@ -76,38 +79,38 @@ namespace NamespaceGPT_ASP.NET_Repository.Controllers
             return NoContent();
         }
 
-        // POST: api/Reviews
+        // POST: api/Posts
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ReviewDTO>> PostReview(ReviewDTO reviewDTO)
+        public async Task<ActionResult<PostDTO>> PostPost(PostDTO postDTO)
         {
-            var reviewRef = DTOToBaseConverters.Converter_DTOToReview(reviewDTO);
-            context.Review.Add(reviewRef);
+            Post postRef = DTOToBaseConverters.Converter_DTOToPost(postDTO);
+            context.Post.Add(postRef);
             await context.SaveChangesAsync();
 
-            reviewDTO.Id = reviewRef.Id;
-            return CreatedAtAction("GetReview", new { id = reviewRef.Id }, reviewDTO);
+            postDTO.Id = postRef.Id;
+            return CreatedAtAction("GetPost", new { id = postRef.Id }, postDTO);
         }
 
-        // DELETE: api/Reviews/5
+        // DELETE: api/Posts/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteReview(int id)
+        public async Task<IActionResult> DeletePost(int id)
         {
-            var review = await context.Review.FindAsync(id);
-            if (review == null)
+            var post = await context.Post.FindAsync(id);
+            if (post == null)
             {
                 return NotFound();
             }
 
-            context.Review.Remove(review);
+            context.Post.Remove(post);
             await context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ReviewExists(int id)
+        private bool PostExists(int id)
         {
-            return context.Review.Any(e => e.Id == id);
+            return context.Post.Any(e => e.Id == id);
         }
     }
 }

@@ -23,14 +23,14 @@ namespace NamespaceGPT_ASP.NET_Repository.Controllers
             this.context = context;
         }
 
-        // GET: api/Reviews
+        // GET: api/Review
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ReviewDTO>>> GetReview()
+        public async Task<ActionResult<IEnumerable<ReviewDTO>>> GetReviews()
         {
             return await context.Review.Select(element => BaseToDTOConverters.Converter_ReviewToDTO(element)).ToListAsync();
         }
 
-        // GET: api/Reviews/5
+        // GET: api/Review/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ReviewDTO>> GetReview(int id)
         {
@@ -44,7 +44,7 @@ namespace NamespaceGPT_ASP.NET_Repository.Controllers
             return BaseToDTOConverters.Converter_ReviewToDTO(review);
         }
 
-        // PUT: api/Reviews/5
+        // PUT: api/Review/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutReview(int id, ReviewDTO reviewDTO)
@@ -55,6 +55,7 @@ namespace NamespaceGPT_ASP.NET_Repository.Controllers
             }
 
             var reviewRef = DTOToBaseConverters.Converter_DTOToReview(reviewDTO);
+
             context.Entry(reviewRef).State = EntityState.Modified;
 
             try
@@ -76,12 +77,12 @@ namespace NamespaceGPT_ASP.NET_Repository.Controllers
             return NoContent();
         }
 
-        // POST: api/Reviews
+        // POST: api/Review
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<ReviewDTO>> PostReview(ReviewDTO reviewDTO)
         {
-            var reviewRef = DTOToBaseConverters.Converter_DTOToReview(reviewDTO);
+            Review reviewRef = DTOToBaseConverters.Converter_DTOToReview(reviewDTO);
             context.Review.Add(reviewRef);
             await context.SaveChangesAsync();
 
@@ -89,7 +90,7 @@ namespace NamespaceGPT_ASP.NET_Repository.Controllers
             return CreatedAtAction("GetReview", new { id = reviewRef.Id }, reviewDTO);
         }
 
-        // DELETE: api/Reviews/5
+        // DELETE: api/Review/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteReview(int id)
         {
