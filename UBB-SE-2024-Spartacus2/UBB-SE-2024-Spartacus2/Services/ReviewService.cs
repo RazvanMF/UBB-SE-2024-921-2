@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Bussiness_social_media.MVVM.Model.Repository;
+using Newtonsoft.Json;
 
 namespace Bussiness_social_media.Services
 {
@@ -27,7 +29,29 @@ namespace Bussiness_social_media.Services
 
         public int AddReview(string userName, int rating, string comment, string title, string imagePath)
         {
-            return reviewRepository.AddReview(userName, rating, comment, title, imagePath, DateTime.Now);
+            Random random = new Random();
+            Review review = new Review(random.Next(1, 1000000), userName, rating, comment, title, imagePath, DateTime.Now);
+            try
+            {
+                HttpClient client = new HttpClient();
+                StringContent content = new StringContent(JsonConvert.SerializeObject(review), Encoding.UTF8, "application/json");
+                content.GetType();
+
+                HttpResponseMessage response = Task.Run(() => client.PostAsync("https://localhost:7040/api/Review", content)).GetAwaiter().GetResult();
+                response.EnsureSuccessStatusCode();  // error-prone
+                string responseBody = Task.Run(() => response.Content.ReadAsStringAsync()).GetAwaiter().GetResult();
+                Review? result = JsonConvert.DeserializeObject<Review>(responseBody);
+                if (result == null)
+                {
+                    throw new Exception("???");
+                }
+
+                return result.Id;
+            }
+            catch
+            {
+                return -1;
+            }
         }
 
         public void DeletePost(int id)

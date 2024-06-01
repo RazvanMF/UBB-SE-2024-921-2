@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\SpartacusDTO\" />
     <Folder Include="Models\SpartacusModels\" />
   </ItemGroup>
 

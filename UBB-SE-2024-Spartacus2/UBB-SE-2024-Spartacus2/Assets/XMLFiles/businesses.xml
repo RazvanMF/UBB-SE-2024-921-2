@@ -1,4 +1,6 @@
-<Business>
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfBusiness xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Business>
     <Id>1</Id>
     <Name>Business Name</Name>
     <Description>Business Description</Description>
@@ -10,19 +12,20 @@
     <Website>www.example.com</Website>
     <Address>123 Business St</Address>
     <CreatedAt>01-01-2022 00:00</CreatedAt>
-    <ManagerUsernames>    
-        <Username>edy</Username>
+    <ManagerUsernames>
+      <Username>edy</Username>
     </ManagerUsernames>
     <PostIds>
-        <PostId>1</PostId>
-        <PostId>2</PostId>
+      <PostId>1</PostId>
+      <PostId>2</PostId>
     </PostIds>
     <ReviewIds>
-        <ReviewId>1</ReviewId>
-        <ReviewId>2</ReviewId>
+      <ReviewId>1</ReviewId>
+      <ReviewId>2</ReviewId>
     </ReviewIds>
     <FaqIds>
-        <FaqId>1</FaqId>
-        <FaqId>2</FaqId>
+      <FaqId>1</FaqId>
+      <FaqId>2</FaqId>
     </FaqIds>
-</Business>
+  </Business>
+</ArrayOfBusiness>

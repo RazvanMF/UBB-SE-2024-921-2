@@ -24,7 +24,7 @@ namespace NamespaceGPT_ASP.NET_Repository.Controllers
             this.context = context;
         }
 
-        // GET: api/Accounts
+        // GET: api/Account
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AccountDTO>>> GetAccount()
         {
@@ -75,7 +75,7 @@ namespace NamespaceGPT_ASP.NET_Repository.Controllers
             return NoContent();
         }
 
-        // POST: api/Accounts
+        // POST: api/Account
         [HttpPost]
         public async Task<ActionResult<AccountDTO>> PostAccount(AccountDTO account)
         {
@@ -100,6 +100,22 @@ namespace NamespaceGPT_ASP.NET_Repository.Controllers
 
             return NoContent();
         }
+
+        // POST: api/Account/login
+        [HttpPost("login")]
+        public async Task<ActionResult<AccountDTO>> Login(AccountLoginDTO loginDTO)
+        {
+            var account = await context.Account
+                .SingleOrDefaultAsync(a => a.Username == loginDTO.Username && a.Password == loginDTO.Password);
+
+            if (account == null)
+            {
+                return NotFound();
+            }
+
+            return BaseToDTOConverters.Converter_AccountToDTO(account);
+        }
+
 
         private bool AccountExists(string username)
         {
