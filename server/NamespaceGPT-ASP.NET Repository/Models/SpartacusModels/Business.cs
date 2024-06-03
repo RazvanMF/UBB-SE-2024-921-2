@@ -54,7 +54,6 @@ namespace NamespaceGPT.Data.Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         [Required]
-        [ForeignKey("Account")]
         public int AccountId { get; set; }
 
         [NotMapped]

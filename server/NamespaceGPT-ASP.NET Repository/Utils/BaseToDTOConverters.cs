@@ -65,7 +65,8 @@ namespace NamespaceGPT_ASP.NET_Repository.Utils
             Email = business.Email,
             Website = business.Website,
             Address = business.Address,
-            CreatedAt = business.CreatedAt
+            CreatedAt = business.CreatedAt,
+            AccountId = business.AccountId
         };
 
         public static FAQDTO Converter_FAQToDTO(FAQ faq) => new FAQDTO

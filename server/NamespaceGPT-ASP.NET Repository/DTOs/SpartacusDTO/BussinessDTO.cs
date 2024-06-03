@@ -15,5 +15,6 @@
         public string Website { get; set; }
         public string Address { get; set; }
         public DateTime CreatedAt { get; set; }
+        public int AccountId { get; set; }
     }
 }

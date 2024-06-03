@@ -75,16 +75,26 @@ namespace NamespaceGPT_ASP.NET_Repository.Controllers
             return NoContent();
         }
 
-        // POST: api/Businesses
+        // POST: api/Business
         [HttpPost]
         public async Task<ActionResult<BussinessDTO>> PostBusiness(BussinessDTO business)
         {
-            context.Business.Add(DTOToBaseConverters.Converter_DTOToBusiness(business));
-            await context.SaveChangesAsync();
+            try
+            {
+                context.Business.Add(DTOToBaseConverters.Converter_DTOToBusiness(business));
+                await context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBusiness", new { id = business.Id }, business);
+                return CreatedAtAction("GetBusiness", new { id = business.Id }, business);
+            }
+            catch (Exception e)
+            {
+                // Log the exception for debugging purposes
+                Console.WriteLine(e);
+
+                // Return a 500 status code to the client
+                return StatusCode(500, "An error occurred while processing the request.");
+            }
         }
-
         // DELETE: api/Businesses/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBusiness(int id)
