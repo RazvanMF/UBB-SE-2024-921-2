@@ -53,12 +53,20 @@ namespace NamespaceGPT.Data.Models
         [Required]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
+        [Required]
+        [ForeignKey("Account")]
+        public int AccountId { get; set; }
+
+        [NotMapped]
         public List<string> ManagerUsernames { get; set; } = new List<string>();
 
+        [NotMapped]
         public List<int> PostIds { get; set; } = new List<int>();
 
+        [NotMapped]
         public List<int> ReviewIds { get; set; } = new List<int>();
 
+        [NotMapped]
         public List<int> FaqIds { get; set; } = new List<int>();
     }
 }

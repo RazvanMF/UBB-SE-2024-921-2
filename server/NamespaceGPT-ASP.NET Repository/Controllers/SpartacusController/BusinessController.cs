@@ -24,7 +24,7 @@ namespace NamespaceGPT_ASP.NET_Repository.Controllers
             this.context = context;
         }
 
-        // GET: api/Businesses
+        // GET: api/Business
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BussinessDTO>>> GetBusiness()
         {

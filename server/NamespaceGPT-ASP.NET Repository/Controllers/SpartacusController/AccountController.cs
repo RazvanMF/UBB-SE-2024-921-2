@@ -115,8 +115,6 @@ namespace NamespaceGPT_ASP.NET_Repository.Controllers
 
             return BaseToDTOConverters.Converter_AccountToDTO(account);
         }
-
-
         private bool AccountExists(string username)
         {
             return context.Account.Any(e => e.Username == username);
