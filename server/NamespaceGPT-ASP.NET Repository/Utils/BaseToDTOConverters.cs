@@ -82,7 +82,8 @@ namespace NamespaceGPT_ASP.NET_Repository.Utils
             NumberOfLikes = post.NumberOfLikes,
             CreationDate = post.CreationDate,
             ImagePath = post.ImagePath,
-            Caption = post.Caption
+            Caption = post.Caption,
+            BusinessId = post.BusinessId
         };
     }
 }
